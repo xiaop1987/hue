@@ -474,6 +474,7 @@ var WorkflowEditorViewModel = function (layout_json, workflow_json, credentials_
   };
   self.isSaving = ko.observable(false);
 
+  self.isInvalid = ko.observable(false);
   self.isRunning = ko.observable(false);
 
   self.newAction = ko.observable();
@@ -1129,7 +1130,7 @@ var WorkflowEditorViewModel = function (layout_json, workflow_json, credentials_
   }
 
   self.save = function () {
-    if (!self.isSaving()) {
+    if (!self.isSaving() && !self.isInvalid()) {
       self.isSaving(true);
       $(".jHueNotify").hide();
       $.post("/oozie/editor/workflow/save/", {
