@@ -21,7 +21,7 @@ package com.cloudera.hue.livy.server.batch
 import java.lang.ProcessBuilder.Redirect
 
 import com.cloudera.hue.livy.sessions._
-import com.cloudera.hue.livy.spark.SparkSubmitProcessBuilder.RelativePath
+import com.cloudera.hue.livy.spark.SparkSubmitProcessBuilder.{RelativePath, AbsolutePath}
 import com.cloudera.hue.livy.{LineBufferedProcess, LivyConf}
 import com.cloudera.hue.livy.spark.SparkSubmitProcessBuilder
 import com.cloudera.hue.livy.yarn._
@@ -54,7 +54,7 @@ object BatchSessionYarn {
     createBatchRequest.className.foreach(builder.className)
     createBatchRequest.jars.map(RelativePath).foreach(builder.jar)
     createBatchRequest.pyFiles.map(RelativePath).foreach(builder.pyFile)
-    createBatchRequest.files.map(RelativePath).foreach(builder.file)
+    createBatchRequest.files.map(AbsolutePath).foreach(builder.file)
     createBatchRequest.driverMemory.foreach(builder.driverMemory)
     createBatchRequest.driverCores.foreach(builder.driverCores)
     createBatchRequest.executorMemory.foreach(builder.executorMemory)
